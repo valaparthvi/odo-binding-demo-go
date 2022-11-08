@@ -20,12 +20,18 @@ var (
 )
 
 func main() {
-	http.HandleFunc("/", HelloServer)
+	http.HandleFunc("/", Ping)
+	http.HandleFunc("/connect", ConnectToMongoDB)
 	http.ListenAndServe("0.0.0.0:8080", nil)
 
 }
 
-func HelloServer(w http.ResponseWriter, r *http.Request) {
+func Ping(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "pong")
+	// fmt.Fprintf(w, "Hello, %s!", r.URL.Path[1:])
+}
+
+func ConnectToMongoDB(w http.ResponseWriter, r *http.Request) {
 	// Create a new client and connect to the server
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(uri))
 
@@ -47,5 +53,3 @@ func HelloServer(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprint(w, "Successfully pinged the server.")
 }
-
-// 600033107023
