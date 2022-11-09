@@ -1,5 +1,8 @@
 
 .odo
+*.*.swp
+*.*.swo
+*.*.swr
 /home/pvala/go-framework/.odo/env
 .odo/odo-file-index.json
 .odo/devstate.json
